@@ -7,8 +7,19 @@ const prisma = new PrismaClient();
 app.use(express.json());
 
 app.get("/", (req: express.Request, res: express.Response) => {
-  res.send("/users endpoint for CRUD operations");
+  res.send({
+    GET: "/users",
+    POST: "/users",
+    DELETE: "/users/:id",
+    PUT: "/users/:id",
+  });
 });
+
+interface Users {
+  id: string;
+  name: string;
+  email: string;
+}
 
 app.get("/users", async (req, res) => {
   const users = await prisma.user.findMany();
